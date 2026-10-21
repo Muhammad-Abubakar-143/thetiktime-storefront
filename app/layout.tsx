@@ -71,6 +71,13 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} ${mono.variable} dark`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="icon" type="image/png" href="/logo/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/logo/favicon.svg" />
+<link rel="shortcut icon" href="/logo/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png" />
+<link rel="manifest" href="/logo/site.webmanifest" />
+      </head>
       <body className="font-sans-body bg-background text-foreground antialiased">
         <Providers>
           <RegionBootstrap />
