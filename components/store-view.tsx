@@ -55,7 +55,7 @@ export function StoreView({ products, brands }: StoreViewProps) {
   const hasMore = visibleCount < sorted.length;
 
   return (
-    <div className="relative min-h-screen bg-[hsl(0_0%_4%)] pt-28 sm:pt-32">
+    <div className="relative min-h-screen bg-[hsl(0_0%_9%)] pt-28 sm:pt-32">
       {/* Header */}
       <section className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-col items-center text-center">
@@ -71,7 +71,7 @@ export function StoreView({ products, brands }: StoreViewProps) {
             className="mt-4 font-serif-display text-4xl font-light text-champagne sm:text-6xl md:text-7xl"
           />
           <Reveal delay={0.1}>
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-steel sm:text-base">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-gray-400 sm:text-base">
               Every timepiece in our collection, in one place.{' '}
               {sorted.length}{' '}
               {sorted.length === 1 ? 'piece' : 'pieces'} — delivered across
@@ -82,26 +82,26 @@ export function StoreView({ products, brands }: StoreViewProps) {
       </section>
 
       {/* Brand quick-nav */}
-      {brands.length > 0 && (
+      {/* {brands.length > 0 && (
         <section className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="mt-10 flex flex-wrap items-center justify-center gap-2.5">
             {brands.map((brand) => (
               <Link
                 key={brand.slug}
                 href={`/shop?brand=${brand.slug}`}
-                className="rounded-full border border-[hsl(var(--gold)/0.15)] px-4 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.2em] text-steel transition-all hover:border-gold hover:text-gold"
+                className="rounded-full border border-[hsl(var(--gold)/0.15)] px-4 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.2em] text-gray-400 transition-all hover:border-gold hover:text-gold"
               >
                 {brand.name}
               </Link>
             ))}
           </div>
         </section>
-      )}
+      )} */}
 
       {/* Toolbar */}
-      <div className="sticky top-16 z-30 mt-10 border-y border-[hsl(var(--gold)/0.1)] bg-[hsl(0_0%_4%/0.85)] backdrop-blur-xl">
+      <div className="sticky top-16 z-30 mt-10 border-y border-[hsl(var(--gold)/0.1)] bg-[hsl(0_0%_8%/0.85)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 sm:px-8">
-          <span className="font-mono-label text-[11px] uppercase tracking-[0.25em] text-steel">
+          <span className="font-mono-label text-[11px] uppercase tracking-[0.25em] text-gray-400">
             {sorted.length} {sorted.length === 1 ? 'Timepiece' : 'Timepieces'}
           </span>
           <div className="flex items-center gap-3">
@@ -142,7 +142,7 @@ export function StoreView({ products, brands }: StoreViewProps) {
             <p className="font-serif-display text-2xl text-champagne">
               The store is being stocked
             </p>
-            <p className="max-w-md text-sm text-steel">
+            <p className="max-w-md text-sm text-gray-400">
               Our atelier is preparing a selection of exceptional timepieces.
               Please check back soon, or contact us for private acquisitions.
             </p>
@@ -171,7 +171,7 @@ function SortInline({
   };
   return (
     <div className="flex items-center gap-2">
-      <span className="hidden font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel sm:inline">
+      <span className="hidden font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400 sm:inline">
         Sort
       </span>
       <select

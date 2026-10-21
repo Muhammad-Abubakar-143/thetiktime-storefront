@@ -44,7 +44,7 @@ export function BrandCard({ brand, index = 0 }: BrandCardProps) {
           <span className="font-serif-display text-2xl text-champagne transition-colors duration-500 group-hover:text-gold">
             {brand.name}
           </span>
-          <span className="mt-2 font-mono-label text-[10px] uppercase tracking-[0.3em] text-steel">
+          <span className="mt-2 font-mono-label text-[10px] uppercase tracking-[0.3em] text-gray-400">
             {brand.productCount} {brand.productCount === 1 ? 'Piece' : 'Pieces'}
           </span>
           <span className="mt-5 flex h-8 w-8 translate-y-2 items-center justify-center rounded-full border border-[hsl(var(--gold)/0.2)] text-gold opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">

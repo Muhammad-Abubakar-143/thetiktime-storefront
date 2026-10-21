@@ -9,7 +9,7 @@ export default function NotFound() {
       <h1 className="mt-4 font-serif-display text-5xl font-light text-champagne sm:text-7xl">
         Timepiece Not Found
       </h1>
-      <p className="mt-5 max-w-md text-sm leading-relaxed text-steel sm:text-base">
+      <p className="mt-5 max-w-md text-sm leading-relaxed text-gray-400 sm:text-base">
         The page you seek has slipped through the gears. Let us guide you back to
         the collection.
       </p>

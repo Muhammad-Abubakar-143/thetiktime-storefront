@@ -93,7 +93,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-4">
             <Link
               href="/shop"
-              className="hidden text-steel transition-colors hover:text-champagne sm:block"
+              className="hidden text-gray-400 transition-colors hover:text-champagne sm:block"
               aria-label="Search"
             >
               <Search className="h-[18px] w-[18px]" strokeWidth={1.5} />
@@ -148,7 +148,7 @@ export function SiteHeader() {
                 <button
                   onClick={() => setMenuOpen(false)}
                   aria-label="Close menu"
-                  className="text-steel hover:text-champagne"
+                  className="text-gray-400 hover:text-champagne"
                 >
                   <X className="h-5 w-5" strokeWidth={1.5} />
                 </button>
@@ -178,7 +178,7 @@ export function SiteHeader() {
               </nav>
               <div className="mt-auto">
                 <div className="hairline mb-6" />
-                <p className="font-mono-label text-[10px] tracking-[0.3em] text-steel">
+                <p className="font-mono-label text-[10px] tracking-[0.3em] text-gray-400">
                   CASH ON DELIVERY · PAKISTAN
                 </p>
               </div>
@@ -204,7 +204,7 @@ function NavLink({
       href={href}
       className={cn(
         'group relative font-mono-label text-[11px] uppercase tracking-[0.25em] transition-colors duration-300',
-        active ? 'text-gold' : 'text-steel hover:text-champagne'
+        active ? 'text-gold' : 'text-gray-400 hover:text-champagne'
       )}
     >
       {label}

@@ -22,7 +22,7 @@ export function StoryView() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div className="relative min-h-screen bg-[hsl(0_0%_4%)] pt-24 sm:pt-28">
+    <div className="relative min-h-screen bg-[hsl(0_0%_9%)] pt-24 sm:pt-28">
       {/* Hero */}
       <section
         ref={heroRef}
@@ -31,7 +31,7 @@ export function StoryView() {
         <div className="absolute inset-0">
           <StoryScene />
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[hsl(0_0%_4%)] via-transparent to-[hsl(0_0%_4%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[hsl(0_0%_9%)] via-transparent to-[hsl(0_0%_7%)]" />
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
           className="relative z-10 flex flex-col items-center px-6 text-center"
@@ -62,7 +62,7 @@ export function StoryView() {
               The Manifesto
             </p>
           </Reveal>
-          <div className="mt-10 space-y-8 text-lg leading-relaxed text-steel sm:text-xl">
+          <div className="mt-10 space-y-8 text-lg leading-relaxed text-gray-400 sm:text-xl">
             <Reveal>
               <p className="font-serif-display text-2xl leading-relaxed text-champagne sm:text-3xl">
                 We believe a watch is never merely an instrument. It is an
@@ -120,7 +120,7 @@ export function StoryView() {
                     <h3 className="mt-1.5 font-serif-display text-xl text-champagne">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-steel">
+                    <p className="mt-2 text-sm leading-relaxed text-gray-400">
                       {item.desc}
                     </p>
                   </div>
@@ -151,7 +151,7 @@ export function StoryView() {
                   <h3 className="font-serif-display text-xl text-gold">
                     {value.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-steel">
+                  <p className="mt-3 text-sm leading-relaxed text-gray-400">
                     {value.desc}
                   </p>
                 </div>
@@ -172,7 +172,7 @@ export function StoryView() {
             className="font-serif-display text-3xl font-light text-champagne sm:text-5xl"
           />
           <Reveal delay={0.15}>
-            <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-steel sm:text-base">
+            <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-gray-400 sm:text-base">
               Discover timepieces worthy of your own chapter. Delivered across
               Pakistan with the assurance of Cash on Delivery.
             </p>

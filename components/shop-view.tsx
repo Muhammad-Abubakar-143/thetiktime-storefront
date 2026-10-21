@@ -125,7 +125,7 @@ export function ShopView({ products, brands, collections }: ShopViewProps) {
             {selectedBrandName ?? 'All Timepieces'}
           </h1>
           <Reveal delay={0.1}>
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-steel sm:text-base">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-gray-400 sm:text-base">
               {filtered.length} {filtered.length === 1 ? 'piece' : 'pieces'} —
               curated for the discerning collector.
             </p>
@@ -138,7 +138,7 @@ export function ShopView({ products, brands, collections }: ShopViewProps) {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
           <button
             onClick={() => setFiltersOpen((v) => !v)}
-            className="flex items-center gap-2 font-mono-label text-[11px] uppercase tracking-[0.25em] text-steel transition-colors hover:text-champagne"
+            className="flex items-center gap-2 font-mono-label text-[11px] uppercase tracking-[0.25em] text-gray-400 transition-colors hover:text-champagne"
           >
             <SlidersHorizontal className="h-4 w-4" strokeWidth={1.5} />
             Filters
@@ -153,7 +153,7 @@ export function ShopView({ products, brands, collections }: ShopViewProps) {
             {activeFilterCount > 0 && (
               <button
                 onClick={clearAll}
-                className="flex items-center gap-1 font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel transition-colors hover:text-gold"
+                className="flex items-center gap-1 font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400 transition-colors hover:text-gold"
               >
                 <X className="h-3 w-3" />
                 Clear
@@ -245,7 +245,7 @@ export function ShopView({ products, brands, collections }: ShopViewProps) {
                   </span>
                   <button
                     onClick={() => setFiltersOpen(false)}
-                    className="text-steel hover:text-champagne"
+                    className="text-gray-400 hover:text-champagne"
                   >
                     <X className="h-5 w-5" strokeWidth={1.5} />
                   </button>
@@ -319,7 +319,7 @@ function FilterChip({
       {label}
       <button
         onClick={onRemove}
-        className="text-steel hover:text-gold"
+        className="text-gray-400 hover:text-gold"
         aria-label="Remove filter"
       >
         <X className="h-3 w-3" />
@@ -362,7 +362,7 @@ function FilterPanel({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search timepieces..."
-          className="w-full rounded-md border border-[hsl(var(--gold)/0.15)] bg-[hsl(0_0%_8%)] px-3 py-2.5 text-sm text-champagne placeholder:text-steel focus:border-gold focus:outline-none"
+          className="w-full rounded-md border border-[hsl(var(--gold)/0.15)] bg-[hsl(0_0%_8%)] px-3 py-2.5 text-sm text-champagne placeholder:text-gray-400 focus:border-gold focus:outline-none"
         />
       </div>
 
@@ -420,7 +420,7 @@ function FilterPanel({
 
       <button
         onClick={clearAll}
-        className="font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel transition-colors hover:text-gold"
+        className="font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400 transition-colors hover:text-gold"
       >
         Reset All Filters
       </button>
@@ -442,7 +442,7 @@ function FilterRadio({
       onClick={onChange}
       className={cn(
         'flex w-full items-center gap-2.5 py-1.5 text-left text-sm transition-colors',
-        checked ? 'text-gold' : 'text-steel hover:text-champagne'
+        checked ? 'text-gold' : 'text-gray-400 hover:text-champagne'
       )}
     >
       <span
@@ -476,7 +476,7 @@ function SortDropdown({
     <div className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 font-mono-label text-[11px] uppercase tracking-[0.25em] text-steel transition-colors hover:text-champagne"
+        className="flex items-center gap-2 font-mono-label text-[11px] uppercase tracking-[0.25em] text-gray-400 transition-colors hover:text-champagne"
       >
         Sort: <span className="text-champagne">{labels[sort]}</span>
         <ChevronDown className="h-3 w-3" />
@@ -503,7 +503,7 @@ function SortDropdown({
                     }}
                     className={cn(
                       'flex w-full items-center justify-between px-4 py-2 text-left text-sm transition-colors hover:bg-[hsl(0_0%_10%)]',
-                      sort === key ? 'text-gold' : 'text-steel'
+                      sort === key ? 'text-gold' : 'text-gray-400'
                     )}
                   >
                     {labels[key]}
@@ -525,7 +525,7 @@ function EmptyResults({ clearAll }: { clearAll: () => void }) {
       <p className="font-serif-display text-2xl text-champagne">
         No timepieces found
       </p>
-      <p className="max-w-sm text-sm text-steel">
+      <p className="max-w-sm text-sm text-gray-400">
         No pieces match your current selection. Adjust your filters or explore
         the full collection.
       </p>

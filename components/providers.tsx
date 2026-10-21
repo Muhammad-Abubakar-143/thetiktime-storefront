@@ -13,7 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           classNames: {
             toast:
               'bg-[hsl(0_0%_8%)] border border-[hsl(var(--gold)/0.2)] text-champagne',
-            description: 'text-steel',
+            description: 'text-gray-400',
           },
         }}
       />

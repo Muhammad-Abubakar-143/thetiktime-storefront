@@ -48,11 +48,11 @@ export function SiteFooter() {
                 <span className="font-serif-display text-2xl tracking-[0.3em] text-champagne">
                   THE TIK TIME
                 </span>
-                <span className="mt-1 block font-mono-label text-[9px] tracking-[0.4em] text-steel">
+                <span className="mt-1 block font-mono-label text-[9px] tracking-[0.4em] text-gray-400">
                   MAISON D&apos;HORLOGERIE · EST. MMXXV
                 </span>
               </Link>
-              <p className="mt-6 max-w-sm text-sm leading-relaxed text-steel">
+              <p className="mt-6 max-w-sm text-sm leading-relaxed text-gray-400">
                 A curated house of luxury wristwatches. Each timepiece is
                 selected for its craftsmanship, heritage, and enduring value —
                 delivered across Pakistan with the assurance of Cash on
@@ -66,7 +66,7 @@ export function SiteFooter() {
                     key={label}
                     href={href}
                     aria-label={label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[hsl(var(--gold)/0.18)] text-steel transition-all hover:border-[hsl(var(--gold)/0.5)] hover:text-gold"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[hsl(var(--gold)/0.18)] text-gray-400 transition-all hover:border-[hsl(var(--gold)/0.5)] hover:text-gold"
                   >
                     <Icon className="h-4 w-4" strokeWidth={1.5} />
                   </a>
@@ -91,7 +91,7 @@ export function SiteFooter() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="text-sm text-steel transition-colors hover:text-champagne"
+                        className="text-sm text-gray-400 transition-colors hover:text-champagne"
                       >
                         {link.label}
                       </Link>
@@ -112,7 +112,7 @@ export function SiteFooter() {
               <h4 className="font-mono-label text-[10px] uppercase tracking-[0.3em] text-gold">
                 Atelier
               </h4>
-              <ul className="mt-5 space-y-4 text-sm text-steel">
+              <ul className="mt-5 space-y-4 text-sm text-gray-400">
                 <li className="flex gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold/70" strokeWidth={1.5} />
                   <span>Jhelum, Pakistan</span>
@@ -137,10 +137,10 @@ export function SiteFooter() {
         <div className="mt-14 hairline" />
 
         <div className="mt-6 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-          <p className="font-mono-label text-[10px] tracking-[0.2em] text-steel">
+          <p className="font-mono-label text-[10px] tracking-[0.2em] text-gray-400">
             © {new Date().getFullYear()} THE TIK TIME — ALL RIGHTS RESERVED
           </p>
-          <p className="font-mono-label text-[10px] tracking-[0.2em] text-steel">
+          <p className="font-mono-label text-[10px] tracking-[0.2em] text-gray-400">
             CASH ON DELIVERY · DELIVERED WITH CARE
           </p>
         </div>

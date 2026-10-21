@@ -92,7 +92,7 @@ export function CheckoutView() {
         <h1 className="mt-6 font-serif-display text-3xl text-champagne">
           Your cart is empty
         </h1>
-        <p className="mt-3 max-w-sm text-sm text-steel">
+        <p className="mt-3 max-w-sm text-sm text-gray-400">
           Add a timepiece to your collection before proceeding to checkout.
         </p>
         <Link href="/shop" className="btn-luxe-gold mt-8">
@@ -115,7 +115,7 @@ export function CheckoutView() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Link
           href="/shop"
-          className="flex items-center gap-2 font-mono-label text-[11px] uppercase tracking-[0.25em] text-steel transition-colors hover:text-champagne"
+          className="flex items-center gap-2 font-mono-label text-[11px] uppercase tracking-[0.25em] text-gray-400 transition-colors hover:text-champagne"
         >
           <ArrowLeft className="h-4 w-4" strokeWidth={1.5} />
           Continue Browsing
@@ -138,12 +138,12 @@ export function CheckoutView() {
                 className={`flex h-7 w-7 items-center justify-center rounded-full border text-xs font-mono-label ${
                   step === s || (step === 'processing' && s === 'review')
                     ? 'border-gold bg-gold text-black'
-                    : 'border-[hsl(var(--gold)/0.2)] text-steel'
+                    : 'border-[hsl(var(--gold)/0.2)] text-gray-400'
                 }`}
               >
                 {i + 1}
               </div>
-              <span className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-steel">
+              <span className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-gray-400">
                 {s === 'details' ? 'Details' : 'Review'}
               </span>
               {i === 0 && <div className="h-px w-8 bg-[hsl(var(--gold)/0.2)]" />}
@@ -277,7 +277,7 @@ export function CheckoutView() {
                         </p>
                       </div>
                     </div>
-                    <p className="mt-3 text-xs leading-relaxed text-steel">
+                    <p className="mt-3 text-xs leading-relaxed text-gray-400">
                       Pay in cash when your timepiece arrives at your door. No
                       advance payment is required. Please have the exact amount
                       ready for the courier.
@@ -317,7 +317,7 @@ export function CheckoutView() {
                   className="flex flex-col items-center gap-5 py-20"
                 >
                   <Loader2 className="h-10 w-10 animate-spin text-gold" />
-                  <p className="font-mono-label text-[11px] uppercase tracking-[0.3em] text-steel">
+                  <p className="font-mono-label text-[11px] uppercase tracking-[0.3em] text-gray-400">
                     Placing Your Order
                   </p>
                 </motion.div>
@@ -353,7 +353,7 @@ export function CheckoutView() {
                         <p className="font-serif-display text-sm leading-tight text-champagne">
                           {item.product?.title ?? item.title}
                         </p>
-                        <p className="text-xs text-steel">Qty: {item.quantity}</p>
+                        <p className="text-xs text-gray-400">Qty: {item.quantity}</p>
                         <p className="mt-auto font-mono-label text-xs text-gold">
                           {formatPrice(item.total, currency)}
                         </p>
@@ -390,7 +390,7 @@ export function CheckoutView() {
                   { icon: Truck, text: 'Nationwide COD Delivery' },
                   { icon: CreditCard, text: 'Pay When You Receive' },
                 ].map((item) => (
-                  <div key={item.text} className="flex items-center gap-2.5 text-steel">
+                  <div key={item.text} className="flex items-center gap-2.5 text-gray-400">
                     <item.icon className="h-4 w-4 shrink-0 text-gold/70" strokeWidth={1.5} />
                     <span className="text-xs">{item.text}</span>
                   </div>
@@ -421,7 +421,7 @@ function CheckoutField({
 }) {
   return (
     <div className={className}>
-      <label className="block font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel">
+      <label className="block font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400">
         {label} {required && <span className="text-gold/60">*</span>}
       </label>
       <input
@@ -438,7 +438,7 @@ function CheckoutField({
 function ReviewRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between gap-4 text-sm">
-      <span className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-steel">
+      <span className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-gray-400">
         {label}
       </span>
       <span className="text-right text-champagne">{value}</span>
@@ -449,7 +449,7 @@ function ReviewRow({ label, value }: { label: string; value: string }) {
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between text-sm">
-      <span className="text-steel">{label}</span>
+      <span className="text-gray-400">{label}</span>
       <span className="text-champagne">{value}</span>
     </div>
   );
@@ -487,7 +487,7 @@ function OrderConfirmation({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mt-4 max-w-md text-sm leading-relaxed text-steel sm:text-base"
+        className="mt-4 max-w-md text-sm leading-relaxed text-gray-400 sm:text-base"
       >
         Thank you for your purchase. Your timepiece is being prepared for
         delivery. Please have the cash amount ready for the courier upon
@@ -500,7 +500,7 @@ function OrderConfirmation({
         transition={{ delay: 0.4 }}
         className="mt-8 rounded-xl border border-[hsl(var(--gold)/0.12)] bg-[hsl(0_0%_5%)] px-8 py-6"
       >
-        <p className="font-mono-label text-[10px] uppercase tracking-[0.3em] text-steel">
+        <p className="font-mono-label text-[10px] uppercase tracking-[0.3em] text-gray-400">
           Order Number
         </p>
         <p className="mt-2 font-serif-display text-2xl text-gold">
@@ -509,7 +509,7 @@ function OrderConfirmation({
         <div className="my-4 hairline" />
         <div className="flex justify-between gap-8">
           <div className="text-left">
-            <p className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-steel">
+            <p className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-gray-400">
               Total
             </p>
             <p className="mt-1 text-lg text-champagne">
@@ -517,7 +517,7 @@ function OrderConfirmation({
             </p>
           </div>
           <div className="text-left">
-            <p className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-steel">
+            <p className="font-mono-label text-[10px] uppercase tracking-[0.2em] text-gray-400">
               Payment
             </p>
             <p className="mt-1 text-lg text-champagne">COD</p>

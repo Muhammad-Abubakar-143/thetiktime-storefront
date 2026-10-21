@@ -150,14 +150,14 @@ export function ProductCard({ product, index = 0, priority }: ProductCardProps) 
                 {formatted}
               </span>
               {hasDiscount && (
-                <span className="font-mono-label text-[11px] text-steel line-through">
+                <span className="font-mono-label text-[11px] text-gray-400 line-through">
                   {formatPrice(original, region?.currency_code)}
                 </span>
               )}
             </div>
             <button
               onClick={handleQuickAdd}
-              className="mt-3 w-full overflow-hidden rounded-full border border-[hsl(var(--gold)/0.2)] py-2 font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel transition-all duration-300 hover:border-gold hover:text-gold"
+              className="mt-3 w-full overflow-hidden rounded-full border border-[hsl(var(--gold)/0.2)] py-2 font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400 transition-all duration-300 hover:border-gold hover:text-gold"
             >
               Quick Add
             </button>

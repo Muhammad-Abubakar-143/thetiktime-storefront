@@ -35,7 +35,7 @@ export function ContactView() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[hsl(0_0%_4%)] pt-28 sm:pt-32">
+    <div className="relative min-h-screen bg-[hsl(0_0%_9%)] pt-28 sm:pt-32">
       {/* Animated background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-1/4 top-1/4 h-96 w-96 animate-pulse-glow rounded-full bg-[hsl(var(--gold)/0.06)] blur-3xl" />
@@ -56,7 +56,7 @@ export function ContactView() {
             className="mt-4 font-serif-display text-4xl font-light text-champagne sm:text-6xl md:text-7xl"
           />
           <Reveal delay={0.1}>
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-steel sm:text-base">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-gray-400 sm:text-base">
               Whether you seek a specific timepiece, have a question about your
               order, or simply wish to talk watches — we are at your service.
             </p>
@@ -80,12 +80,12 @@ export function ContactView() {
                     <item.icon className="h-5 w-5" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <p className="font-mono-label text-[10px] uppercase tracking-[0.3em] text-steel">
+                    <p className="font-mono-label text-[10px] uppercase tracking-[0.3em] text-gray-400">
                       {item.label}
                     </p>
                     <p className="mt-1 text-sm text-champagne">{item.value}</p>
                     {item.sub && (
-                      <p className="text-xs text-steel">{item.sub}</p>
+                      <p className="text-xs text-gray-400">{item.sub}</p>
                     )}
                   </div>
                 </div>
@@ -98,7 +98,7 @@ export function ContactView() {
               <p className="font-mono-label text-[10px] uppercase tracking-[0.3em] text-gold">
                 Cash on Delivery
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-steel">
+              <p className="mt-2 text-sm leading-relaxed text-gray-400">
                 All orders are delivered with Cash on Delivery. Pay only when
                 your timepiece arrives — no advance payment required.
               </p>
@@ -134,7 +134,7 @@ export function ContactView() {
                   onChange={(v) => setForm((f) => ({ ...f, phone: v }))}
                 />
                 <div>
-                  <label className="block font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel">
+                  <label className="block font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400">
                     Subject
                   </label>
                   <select
@@ -153,7 +153,7 @@ export function ContactView() {
                 </div>
               </div>
               <div className="mt-5">
-                <label className="block font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel">
+                <label className="block font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400">
                   Message
                 </label>
                 <textarea
@@ -164,7 +164,7 @@ export function ContactView() {
                     setForm((f) => ({ ...f, message: e.target.value }))
                   }
                   placeholder="Tell us how we may assist you..."
-                  className="mt-2 w-full resize-none rounded-md border border-[hsl(var(--gold)/0.15)] bg-[hsl(0_0%_8%)] px-3 py-2.5 text-sm text-champagne placeholder:text-steel focus:border-gold focus:outline-none"
+                  className="mt-2 w-full resize-none rounded-md border border-[hsl(var(--gold)/0.15)] bg-[hsl(0_0%_8%)] px-3 py-2.5 text-sm text-champagne placeholder:text-gray-400 focus:border-gold focus:outline-none"
                 />
               </div>
               <button
@@ -212,7 +212,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel">
+      <label className="block font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400">
         {label} {required && <span className="text-gold/60">*</span>}
       </label>
       <input
@@ -230,13 +230,13 @@ const CONTACT_INFO = [
   {
     icon: MapPin,
     label: 'Atelier',
-    value: 'Lahore, Pakistan',
+    value: 'Jhelum, Pakistan',
     sub: 'By appointment only',
   },
   {
     icon: Phone,
     label: 'Telephone',
-    value: '+92 300 0000000',
+    value: '+92 308 9453764',
     sub: 'Mon — Sat',
   },
   {

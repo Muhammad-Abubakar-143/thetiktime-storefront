@@ -56,7 +56,7 @@ export function CartDrawer() {
                   Your Cart
                 </span>
                 {itemCount > 0 && (
-                  <span className="font-mono-label text-[10px] text-steel">
+                  <span className="font-mono-label text-[10px] text-gray-400">
                     ({itemCount})
                   </span>
                 )}
@@ -64,7 +64,7 @@ export function CartDrawer() {
               <button
                 onClick={closeCart}
                 aria-label="Close cart"
-                className="text-steel transition-colors hover:text-champagne"
+                className="text-gray-400 transition-colors hover:text-champagne"
               >
                 <X className="h-5 w-5" strokeWidth={1.5} />
               </button>
@@ -79,7 +79,7 @@ export function CartDrawer() {
                   <p className="font-serif-display text-xl text-champagne">
                     Your cart awaits
                   </p>
-                  <p className="mt-2 text-sm text-steel">
+                  <p className="mt-2 text-sm text-gray-400">
                     Discover timepieces worthy of your collection.
                   </p>
                 </div>
@@ -131,7 +131,7 @@ export function CartDrawer() {
                                 </Link>
                                 {item.variant?.title &&
                                   item.variant.title !== 'Default Title' && (
-                                    <p className="mt-0.5 text-xs text-steel">
+                                    <p className="mt-0.5 text-xs text-gray-400">
                                       {item.variant.title}
                                     </p>
                                   )}
@@ -139,7 +139,7 @@ export function CartDrawer() {
                               <button
                                 onClick={() => removeItem(item.id)}
                                 aria-label="Remove item"
-                                className="text-steel transition-colors hover:text-destructive"
+                                className="text-gray-400 transition-colors hover:text-destructive"
                               >
                                 <Trash2 className="h-4 w-4" strokeWidth={1.5} />
                               </button>
@@ -152,7 +152,7 @@ export function CartDrawer() {
                                   }
                                   disabled={loading}
                                   aria-label="Decrease quantity"
-                                  className="flex h-7 w-7 items-center justify-center text-steel hover:text-gold disabled:opacity-40"
+                                  className="flex h-7 w-7 items-center justify-center text-gray-400 hover:text-gold disabled:opacity-40"
                                 >
                                   <Minus className="h-3 w-3" strokeWidth={2} />
                                 </button>
@@ -165,7 +165,7 @@ export function CartDrawer() {
                                   }
                                   disabled={loading}
                                   aria-label="Increase quantity"
-                                  className="flex h-7 w-7 items-center justify-center text-steel hover:text-gold disabled:opacity-40"
+                                  className="flex h-7 w-7 items-center justify-center text-gray-400 hover:text-gold disabled:opacity-40"
                                 >
                                   <Plus className="h-3 w-3" strokeWidth={2} />
                                 </button>
@@ -183,14 +183,14 @@ export function CartDrawer() {
 
                 <div className="border-t border-[hsl(var(--gold)/0.12)] px-6 py-5">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono-label text-[11px] uppercase tracking-[0.25em] text-steel">
+                    <span className="font-mono-label text-[11px] uppercase tracking-[0.25em] text-gray-400">
                       Subtotal
                     </span>
                     <span className="font-serif-display text-xl text-champagne">
                       {formatPrice(subtotal, currency)}
                     </span>
                   </div>
-                  <p className="mt-2 font-mono-label text-[10px] tracking-[0.15em] text-steel">
+                  <p className="mt-2 font-mono-label text-[10px] tracking-[0.15em] text-gray-400">
                     CASH ON DELIVERY · SHIPPING CALCULATED AT CHECKOUT
                   </p>
                   <Link
@@ -202,7 +202,7 @@ export function CartDrawer() {
                   </Link>
                   <button
                     onClick={closeCart}
-                    className="mt-3 w-full text-center font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel transition-colors hover:text-champagne"
+                    className="mt-3 w-full text-center font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400 transition-colors hover:text-champagne"
                   >
                     Continue Browsing
                   </button>

@@ -13,7 +13,7 @@ interface BrandsViewProps {
 
 export function BrandsView({ brands }: BrandsViewProps) {
   return (
-    <div className="relative min-h-screen bg-[hsl(0_0%_4%)] pt-28 sm:pt-32">
+    <div className="relative min-h-screen bg-[hsl(0_0%_9%)] pt-28 sm:pt-32">
       <section className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-col items-center text-center">
           <Reveal>
@@ -27,7 +27,7 @@ export function BrandsView({ brands }: BrandsViewProps) {
             className="mt-4 font-serif-display text-4xl font-light text-champagne sm:text-6xl md:text-7xl"
           />
           <Reveal delay={0.1}>
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-steel sm:text-base">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-gray-400 sm:text-base">
               Each maison represents a distinct tradition of craftsmanship.
               Explore the houses behind every timepiece in our collection.
             </p>
@@ -52,7 +52,7 @@ export function BrandsView({ brands }: BrandsViewProps) {
             <p className="font-serif-display text-2xl text-champagne">
               Maisons incoming
             </p>
-            <p className="max-w-md text-sm text-steel">
+            <p className="max-w-md text-sm text-gray-400">
               Our directory of maisons will appear here once products are
               stocked. Each brand will link to its curated selection.
             </p>
@@ -78,7 +78,7 @@ export function BrandsView({ brands }: BrandsViewProps) {
             className="mt-4 font-serif-display text-3xl font-light text-champagne sm:text-5xl"
           />
           <Reveal delay={0.15}>
-            <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-steel">
+            <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-gray-400">
               Our network extends beyond what is listed. Tell us the piece you
               seek and we will endeavor to acquire it.
             </p>

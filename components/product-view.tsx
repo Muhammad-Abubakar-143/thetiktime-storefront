@@ -72,7 +72,7 @@ export function ProductView({ product, related }: ProductViewProps) {
     <div className="relative min-h-screen bg-[hsl(0_0%_4%)] pt-24 sm:pt-28">
       {/* Breadcrumb */}
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <nav className="flex items-center gap-2 font-mono-label text-[10px] uppercase tracking-[0.25em] text-steel">
+        <nav className="flex items-center gap-2 font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400">
           <Link href="/" className="hover:text-champagne">Home</Link>
           <ChevronRight className="h-3 w-3" />
           <Link href="/shop" className="hover:text-champagne">Collection</Link>
@@ -155,7 +155,7 @@ export function ProductView({ product, related }: ProductViewProps) {
           />
           {product.subtitle && (
             <Reveal delay={0.1}>
-              <p className="mt-3 text-sm text-steel sm:text-base">
+              <p className="mt-3 text-sm text-gray-400 sm:text-base">
                 {product.subtitle}
               </p>
             </Reveal>
@@ -167,7 +167,7 @@ export function ProductView({ product, related }: ProductViewProps) {
                 {formatted}
               </span>
               {original && original > price && (
-                <span className="font-mono-label text-base text-steel line-through">
+                <span className="font-mono-label text-base text-gray-400 line-through">
                   {formatPrice(original, currency)}
                 </span>
               )}
@@ -178,7 +178,7 @@ export function ProductView({ product, related }: ProductViewProps) {
 
           {product.description && (
             <Reveal delay={0.2}>
-              <div className="prose prose-sm max-w-none text-steel">
+              <div className="prose prose-sm max-w-none text-gray-400">
                 <p className="text-sm leading-relaxed sm:text-base">
                   {product.description}
                 </p>
@@ -194,7 +194,7 @@ export function ProductView({ product, related }: ProductViewProps) {
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                   disabled={quantity <= 1 || adding}
                   aria-label="Decrease quantity"
-                  className="flex h-12 w-12 items-center justify-center text-steel transition-colors hover:text-gold disabled:opacity-40"
+                  className="flex h-12 w-12 items-center justify-center text-gray-400 transition-colors hover:text-gold disabled:opacity-40"
                 >
                   <Minus className="h-4 w-4" strokeWidth={1.5} />
                 </button>
@@ -205,7 +205,7 @@ export function ProductView({ product, related }: ProductViewProps) {
                   onClick={() => setQuantity((q) => q + 1)}
                   disabled={adding}
                   aria-label="Increase quantity"
-                  className="flex h-12 w-12 items-center justify-center text-steel transition-colors hover:text-gold disabled:opacity-40"
+                  className="flex h-12 w-12 items-center justify-center text-gray-400 transition-colors hover:text-gold disabled:opacity-40"
                 >
                   <Plus className="h-4 w-4" strokeWidth={1.5} />
                 </button>
@@ -246,7 +246,7 @@ export function ProductView({ product, related }: ProductViewProps) {
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="flex items-center gap-2.5 text-steel"
+                  className="flex items-center gap-2.5 text-gray-400"
                 >
                   <item.icon className="h-4 w-4 shrink-0 text-gold/70" strokeWidth={1.5} />
                   <span className="text-xs">{item.label}</span>
@@ -267,7 +267,7 @@ export function ProductView({ product, related }: ProductViewProps) {
                     key={spec.label}
                     className="flex items-center justify-between py-3"
                   >
-                    <dt className="font-mono-label text-[11px] uppercase tracking-[0.2em] text-steel">
+                    <dt className="font-mono-label text-[11px] uppercase tracking-[0.2em] text-gray-400">
                       {spec.label}
                     </dt>
                     <dd className="text-sm text-champagne">{spec.value}</dd>
@@ -328,7 +328,7 @@ function MobileStickyBar({
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[hsl(var(--gold)/0.15)] bg-[hsl(0_0%_5%/0.95)] backdrop-blur-xl lg:hidden">
       <div className="flex items-center justify-between gap-4 px-5 py-3">
         <div>
-          <p className="font-mono-label text-[9px] uppercase tracking-[0.2em] text-steel">
+          <p className="font-mono-label text-[9px] uppercase tracking-[0.2em] text-gray-400">
             Price
           </p>
           <p className="font-serif-display text-lg text-gold">{price}</p>
