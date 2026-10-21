@@ -95,7 +95,7 @@ export function CheckoutView() {
         <p className="mt-3 max-w-sm text-sm text-gray-400">
           Add a timepiece to your collection before proceeding to checkout.
         </p>
-        <Link href="/shop" className="btn-luxe-gold mt-8">
+        <Link href="/collection" className="btn-luxe-gold mt-8">
           Explore the Collection
         </Link>
       </div>
@@ -114,7 +114,7 @@ export function CheckoutView() {
     <div className="relative min-h-screen bg-[hsl(0_0%_4%)] pt-28 sm:pt-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Link
-          href="/shop"
+          href="/store"
           className="flex items-center gap-2 font-mono-label text-[11px] uppercase tracking-[0.25em] text-gray-400 transition-colors hover:text-champagne"
         >
           <ArrowLeft className="h-4 w-4" strokeWidth={1.5} />
@@ -531,7 +531,7 @@ function OrderConfirmation({
         transition={{ delay: 0.5 }}
         className="mt-8 flex flex-col gap-3 sm:flex-row"
       >
-        <Link href="/shop" className="btn-luxe-gold">
+        <Link href="/store" className="btn-luxe-gold">
           Continue Browsing
         </Link>
         <Link href="/" className="btn-luxe-ghost">

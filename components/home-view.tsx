@@ -165,7 +165,7 @@ export function HomeView({ featured, brands }: HomeViewProps) {
           )}
 
           <div className="mt-14 flex justify-center">
-            <Link href="/shop" className="btn-luxe-ghost group">
+            <Link href="/collection" className="btn-luxe-ghost group">
               View Full Collection
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
             </Link>
@@ -394,7 +394,7 @@ function FinalCTA() {
           </p>
         </Reveal>
         <Reveal delay={0.25}>
-          <Link href="/shop" className="btn-luxe-gold mt-10 group">
+          <Link href="/collection" className="btn-luxe-gold mt-10 group">
             Explore the Collection
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
           </Link>

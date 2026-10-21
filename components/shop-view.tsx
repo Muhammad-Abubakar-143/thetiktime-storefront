@@ -49,7 +49,7 @@ export function ShopView({ products, brands, collections }: ShopViewProps) {
     if (sort !== 'featured') sp.set('sort', sort);
     if (query) sp.set('q', query);
     const qs = sp.toString();
-    router.replace(qs ? `/shop?${qs}` : '/shop', { scroll: false });
+    router.replace(qs ? `/collection?${qs}` : '/collection', { scroll: false });
     setVisibleCount(12);
   }, [selectedBrand, selectedCollection, sort, query, router]);
 

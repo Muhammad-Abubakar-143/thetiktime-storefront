@@ -63,19 +63,19 @@ export function ProductView({ product, related }: ProductViewProps) {
 
   const specs = [
     { label: 'Brand', value: brand || '—' },
-    { label: 'Material', value: product.material || 'Stainless Steel' },
-    { label: 'Origin', value: product.origin_country || 'Switzerland' },
+    { label: 'Material', value: product.material || '_' },
+    { label: 'Origin', value: product.origin_country || '_' },
     { label: 'Weight', value: product.weight ? `${product.weight}g` : '—' },
   ];
 
   return (
-    <div className="relative min-h-screen bg-[hsl(0_0%_4%)] pt-24 sm:pt-28">
+    <div className="relative min-h-screen bg-[hsl(0_0%_9%)] pt-24 sm:pt-28">
       {/* Breadcrumb */}
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <nav className="flex items-center gap-2 font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400">
           <Link href="/" className="hover:text-champagne">Home</Link>
           <ChevronRight className="h-3 w-3" />
-          <Link href="/shop" className="hover:text-champagne">Collection</Link>
+          <Link href="/collection" className="hover:text-champagne">Collection</Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-gold">{truncate(product.title, 40)}</span>
         </nav>
@@ -140,7 +140,7 @@ export function ProductView({ product, related }: ProductViewProps) {
           <Reveal>
             {brand && (
               <Link
-                href={`/shop?brand=${slugify(brand)}`}
+                href={`/collection?brand=${slugify(brand)}`}
                 className="font-mono-label text-[11px] uppercase tracking-[0.3em] text-gold transition-colors hover:text-champagne"
               >
                 {brand}

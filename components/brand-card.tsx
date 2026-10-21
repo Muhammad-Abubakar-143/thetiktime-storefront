@@ -26,7 +26,7 @@ export function BrandCard({ brand, index = 0 }: BrandCardProps) {
       }}
     >
       <Link
-        href={`/shop?brand=${brand.slug}`}
+        href={`/collection?brand=${brand.slug}`}
         className="group relative flex aspect-[5/3] flex-col items-center justify-center overflow-hidden rounded-xl border border-[hsl(var(--gold)/0.1)] bg-[hsl(0_0%_5%)] p-6 text-center transition-all duration-500 hover:border-[hsl(var(--gold)/0.35)]"
       >
         {brand.thumbnail && (

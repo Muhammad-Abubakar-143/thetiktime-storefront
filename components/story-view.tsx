@@ -178,7 +178,7 @@ export function StoryView() {
             </p>
           </Reveal>
           <Reveal delay={0.25}>
-            <Link href="/shop" className="btn-luxe-gold mt-8 group">
+            <Link href="/collection" className="btn-luxe-gold mt-8 group">
               Explore the Collection
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
             </Link>

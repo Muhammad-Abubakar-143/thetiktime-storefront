@@ -84,7 +84,7 @@ export function CartDrawer() {
                   </p>
                 </div>
                 <Link
-                  href="/shop"
+                  href="/collection"
                   onClick={closeCart}
                   className="btn-luxe-gold mt-2"
                 >

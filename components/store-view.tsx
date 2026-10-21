@@ -88,7 +88,7 @@ export function StoreView({ products, brands }: StoreViewProps) {
             {brands.map((brand) => (
               <Link
                 key={brand.slug}
-                href={`/shop?brand=${brand.slug}`}
+                href={`/collection?brand=${brand.slug}`}
                 className="rounded-full border border-[hsl(var(--gold)/0.15)] px-4 py-1.5 font-mono-label text-[10px] uppercase tracking-[0.2em] text-gray-400 transition-all hover:border-gold hover:text-gold"
               >
                 {brand.name}

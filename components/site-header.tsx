@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/shop', label: 'Collection' },
+  // { href: '/collection', label: 'Collection' },
   { href: '/store', label: 'Store' },
   { href: '/brands', label: 'Brands' },
   { href: '/our-story', label: 'Our Story' },
@@ -92,7 +92,7 @@ export function SiteHeader() {
 
           <div className="flex items-center gap-4">
             <Link
-              href="/shop"
+              href="/collection"
               className="hidden text-gray-400 transition-colors hover:text-champagne sm:block"
               aria-label="Search"
             >

@@ -8,7 +8,7 @@ const FOOTER_LINKS = [
   {
     title: 'Maison',
     links: [
-      { label: 'Collection', href: '/shop' },
+      // { label: 'Collection', href: '/collection' },
       { label: 'Store', href: '/store' },
       { label: 'Brands', href: '/brands' },
       { label: 'Our Story', href: '/our-story' },
