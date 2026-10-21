@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" fill="none">
+  <rect width="800" height="800" fill="#0a0a0b"/>
+  <defs>
+    <radialGradient id="face" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#1a1a1d"/>
+      <stop offset="0.7" stop-color="#101012"/>
+      <stop offset="1" stop-color="#08080a"/>
+    </radialGradient>
+    <linearGradient id="bezel" x1="0" y1="0" x2="800" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c9a86a"/>
+      <stop offset="0.5" stop-color="#8a6f3e"/>
+      <stop offset="1" stop-color="#5a4525"/>
+    </linearGradient>
+    <linearGradient id="straps" x1="0" y1="0" x2="0" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1c1c20"/>
+      <stop offset="1" stop-color="#0c0c0e"/>
+    </linearGradient>
+  </defs>
+  <rect x="300" y="40" width="200" height="200" rx="40" fill="url(#straps)"/>
+  <rect x="300" y="560" width="200" height="200" rx="40" fill="url(#straps)"/>
+  <circle cx="400" cy="400" r="240" fill="url(#bezel)"/>
+  <circle cx="400" cy="400" r="220" fill="url(#face)"/>
+  <circle cx="400" cy="400" r="220" stroke="#c9a86a" stroke-opacity="0.4" stroke-width="2"/>
+  <g stroke="#c9a86a" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round">
+    <line x1="400" y1="200" x2="400" y2="222"/>
+    <line x1="600" y1="400" x2="578" y2="400"/>
+    <line x1="400" y1="600" x2="400" y2="578"/>
+    <line x1="200" y1="400" x2="222" y2="400"/>
+  </g>
+  <g stroke="#e8e6e1" stroke-opacity="0.7" stroke-width="2" stroke-linecap="round">
+    <line x1="400" y1="210" x2="400" y2="226"/>
+    <line x1="590" y1="400" x2="574" y2="400"/>
+    <line x1="400" y1="590" x2="400" y2="574"/>
+    <line x1="210" y1="400" x2="226" y2="400"/>
+  </g>
+  <g stroke="#8a8a8a" stroke-opacity="0.4" stroke-width="1.5" stroke-linecap="round">
+    <line x1="500" y1="223" x2="495" y2="238"/>
+    <line x1="555" y1="245" x2="548" y2="258"/>
+    <line x1="577" y1="300" x2="564" y2="307"/>
+    <line x1="577" y1="500" x2="564" y2="493"/>
+    <line x1="555" y1="555" x2="548" y2="542"/>
+    <line x1="500" y1="577" x2="495" y2="562"/>
+    <line x1="300" y1="577" x2="305" y2="562"/>
+    <line x1="245" y1="555" x2="252" y2="542"/>
+    <line x1="223" y1="500" x2="236" y2="493"/>
+    <line x1="223" y1="300" x2="236" y2="307"/>
+    <line x1="245" y1="245" x2="252" y2="258"/>
+    <line x1="300" y1="223" x2="305" y2="238"/>
+  </g>
+  <line x1="400" y1="400" x2="400" y2="260" stroke="#e8e6e1" stroke-width="6" stroke-linecap="round"/>
+  <line x1="400" y1="400" x2="500" y2="400" stroke="#c9a86a" stroke-width="4" stroke-linecap="round"/>
+  <line x1="400" y1="400" x2="400" y2="340" stroke="#c9a86a" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="400" cy="400" r="8" fill="#c9a86a"/>
+  <circle cx="400" cy="400" r="3" fill="#08080a"/>
+  <text x="400" y="300" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#c9a86a" fill-opacity="0.85" letter-spacing="3">THE TIK TIME</text>
+  <text x="400" y="520" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#e8e6e1" fill-opacity="0.5" letter-spacing="2">AUTOMATIC</text>
+</svg>
