@@ -127,6 +127,7 @@ export interface Cart {
   id: string;
   currency_code: string;
   region_id: string;
+  payment_collection?: { id: string } | null;
   email?: string | null;
   items: CartItem[];
   shipping_address?: Address | null;
@@ -373,16 +374,12 @@ export async function updateCartShippingAddress(
 export async function listShippingOptions(
   cartId: string
 ): Promise<ShippingOption[]> {
-  try {
-    const data = await medusaRequest<{
-      shipping_options: ShippingOption[];
-    }>('/store/shipping-options', {
-      query: { cart_id: cartId },
-    });
-    return data.shipping_options;
-  } catch {
-    return [];
-  }
+  const data = await medusaRequest<{
+    shipping_options: ShippingOption[];
+  }>('/store/shipping-options', {
+    query: { cart_id: cartId },
+  });
+  return data.shipping_options;
 }
 
 export async function addShippingMethod(
@@ -396,12 +393,29 @@ export async function addShippingMethod(
   return data.cart;
 }
 
-export async function initPaymentSessions(cartId: string): Promise<Cart> {
-  const data = await medusaRequest<{ cart: Cart }>(
-    `/store/carts/${cartId}/payment-sessions`,
-    { method: 'POST' }
+export async function initPaymentSessions(cartId: string): Promise<void> {
+  const { cart } = await medusaRequest<{ cart: Cart }>(
+    `/store/carts/${cartId}`,
+    { query: { fields: '+payment_collection' } }
   );
-  return data.cart;
+
+  const { payment_collection: existingCollection } = cart;
+  const { payment_collection } = existingCollection?.id
+    ? { payment_collection: existingCollection }
+    : await medusaRequest<{
+        payment_collection: { id: string };
+      }>('/store/payment-collections', {
+        method: 'POST',
+        body: { cart_id: cartId },
+      });
+
+  await medusaRequest(
+    `/store/payment-collections/${payment_collection.id}/payment-sessions`,
+    {
+      method: 'POST',
+      body: { provider_id: 'pp_system_default' },
+    }
+  );
 }
 
 export async function completeCart(cartId: string): Promise<Order> {

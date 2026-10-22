@@ -140,7 +140,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       setCart(working);
 
       const options = await apiListShippingOptions(working.id);
-      if (options.length) {
+      if (options.length === 0 && !working.shipping_methods?.length) {
+        throw new Error(
+          'No shipping options are available for this delivery address. Please contact us to complete your order.'
+        );
+      }
+      if (options.length && !working.shipping_methods?.length) {
         const option =
           options.find((o) => o.id === input.shippingOptionId) ?? options[0];
         working = await apiAddShippingMethod(working.id, option.id);
