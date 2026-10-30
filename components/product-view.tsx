@@ -60,12 +60,23 @@ export function ProductView({ product, related }: ProductViewProps) {
       setAdding(false);
     }
   };
+  const getMetadataValue = (key: string) => {
+    const value = product.metadata?.[key];
+    return typeof value === 'string' && value.trim() ? value : '—';
+  };
 
   const specs = [
     { label: 'Brand', value: brand || '—' },
-    { label: 'Material', value: product.material || '_' },
-    { label: 'Origin', value: product.origin_country || '_' },
-    { label: 'Weight', value: product.weight ? `${product.weight}g` : '—' },
+    { label: 'Model', value: getMetadataValue('model') },
+    { label: 'Display', value: getMetadataValue('display') },
+    { label: 'Case Material', value: getMetadataValue('case_material') },
+    { label: 'Dial Color', value: getMetadataValue('dial_color') },
+    { label: 'Dial Size', value: getMetadataValue('dial_size') },
+    { label: 'Strap Material', value: getMetadataValue('strap_material') },
+    { label: 'Strap Color', value: getMetadataValue('strap_color') },
+    { label: 'Movement', value: getMetadataValue('movement') },
+    { label: 'Style', value: getMetadataValue('style') },
+    { label: 'Lock', value: getMetadataValue('lock') },
   ];
 
   return (

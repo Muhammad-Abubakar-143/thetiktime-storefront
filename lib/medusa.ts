@@ -188,6 +188,7 @@ const PRODUCT_FIELDS = [
   '*tags',
   '*categories',
   '*type',
+  '+metadata',
 ].join(',');
 
 export async function listRegions(): Promise<Region[]> {
