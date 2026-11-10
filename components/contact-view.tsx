@@ -13,6 +13,7 @@ export function ContactView() {
     phone: '',
     subject: 'General Enquiry',
     message: '',
+    website: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -20,18 +21,38 @@ export function ContactView() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setSubmitting(false);
-    setSubmitted(true);
-    toast.success('Your message has been received. We will respond shortly.');
-    setForm({
-      name: '',
-      email: '',
-      phone: '',
-      subject: 'General Enquiry',
-      message: '',
-    });
-    setTimeout(() => setSubmitted(false), 5000);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const result = (await response.json()) as { message?: string };
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Unable to send your message.');
+      }
+
+      setSubmitted(true);
+      toast.success('Your message has been sent. We will respond shortly.');
+      setForm({
+        name: '',
+        email: '',
+        phone: '',
+        subject: 'General Enquiry',
+        message: '',
+        website: '',
+      });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : 'Unable to send your message. Please try again.'
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -113,6 +134,20 @@ export function ContactView() {
               onSubmit={handleSubmit}
               className="rounded-2xl border border-[hsl(var(--gold)/0.12)] bg-[hsl(0_0%_5%)] p-6 sm:p-8"
             >
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="contact-website">Website</label>
+                <input
+                  id="contact-website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, website: e.target.value }))
+                  }
+                />
+              </div>
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field
                   label="Full Name"
@@ -242,7 +277,7 @@ const CONTACT_INFO = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'care@thetiktime.com',
+    value: 'thetiktime0@gmail.com',
     sub: 'We respond within 24 hours',
   },
   {

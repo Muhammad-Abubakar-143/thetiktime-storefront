@@ -18,10 +18,10 @@ const FOOTER_LINKS = [
   {
     title: 'Client Care',
     links: [
-      { label: 'Shipping & Delivery', href: '/contact' },
-      { label: 'Cash on Delivery', href: '/contact' },
-      { label: 'Returns & Warranty', href: '/contact' },
-      { label: 'Watch Care', href: '/our-story' },
+      { label: 'Shipping & Delivery', href: '/shipping' },
+      { label: 'Cash on Delivery', href: '/cash-on-delivery' },
+      { label: 'Returns & Warranty', href: '/refunds' },
+      { label: 'Watch Care', href: '/watch-care' },
     ],
   },
 ];
@@ -123,7 +123,7 @@ export function SiteFooter() {
                 </li>
                 <li className="flex gap-3">
                   <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold/70" strokeWidth={1.5} />
-                  <span>care@thetiktime.com</span>
+                  <span>thetiktime0@gmail.com</span>
                 </li>
                 <li className="flex gap-3">
                   <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold/70" strokeWidth={1.5} />
