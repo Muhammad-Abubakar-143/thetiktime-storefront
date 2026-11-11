@@ -90,6 +90,7 @@ function variantMatchesSelection(
 }
 
 export function ProductView({ product, related }: ProductViewProps) {
+  console.log('ProductView rendered with product:', product);
   const { addItem, region, loading } = useCart();
   const currency = region?.currency_code ?? 'pkr';
   const images = getProductImages(product);
@@ -121,6 +122,13 @@ export function ProductView({ product, related }: ProductViewProps) {
     ? selectedVariantPrice.original
     : productPrice.original;
   const formatted = formatPrice(price, currency);
+  const galleryImages = variant?.thumbnail
+    ? [
+        variant.thumbnail,
+        ...images.filter((image) => image !== variant.thumbnail),
+      ]
+    : images;
+  const currentImage = galleryImages[selectedImage] ?? images[0];
 
   useEffect(() => {
     setSelectedOptions(getInitialOptionSelections(product));
@@ -185,7 +193,7 @@ export function ProductView({ product, related }: ProductViewProps) {
           <div className="relative aspect-square overflow-hidden rounded-xl border border-[hsl(var(--gold)/0.12)] bg-[hsl(0_0%_6%)]">
             <AnimatePresence mode="wait">
               <motion.div
-                key={selectedImage}
+                key={currentImage}
                 initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
@@ -193,7 +201,7 @@ export function ProductView({ product, related }: ProductViewProps) {
                 className="absolute inset-0"
               >
                 <Image
-                  src={getImageUrl(images[selectedImage])}
+                  src={getImageUrl(currentImage)}
                   alt={product.title}
                   fill
                   priority
@@ -208,9 +216,9 @@ export function ProductView({ product, related }: ProductViewProps) {
               </span>
             )}
           </div>
-          {images.length > 1 && (
+          {galleryImages.length > 1 && (
             <div className="flex gap-3 overflow-x-auto scrollbar-hidden">
-              {images.map((img, i) => (
+              {galleryImages.map((img, i) => (
                 <button
                   key={i}
                   onClick={() => setSelectedImage(i)}
@@ -291,10 +299,13 @@ export function ProductView({ product, related }: ProductViewProps) {
                         aria-pressed={selected}
                         disabled={!available || adding}
                         onClick={() =>
-                          setSelectedOptions((current) => ({
-                            ...current,
-                            [option.id]: value.id,
-                          }))
+                          {
+                            setSelectedOptions((current) => ({
+                              ...current,
+                              [option.id]: value.id,
+                            }));
+                            setSelectedImage(0);
+                          }
                         }
                         className={`rounded-lg border px-3 py-2 transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
                           selected

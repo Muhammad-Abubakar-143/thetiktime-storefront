@@ -26,6 +26,7 @@ export interface CalculatedPrice {
 export interface ProductVariant {
   id: string;
   title: string;
+  thumbnail?: string | null;
   sku?: string | null;
   barcode?: string | null;
   calculated_price?: CalculatedPrice;
