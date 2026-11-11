@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import { useCart } from '@/hooks/use-cart';
-import { formatPrice, getMinVariant, getProductImages } from '@/lib/format';
+import { formatPrice, getProductImages } from '@/lib/format';
 import { useEffect } from 'react';
 
 export function CartDrawer() {
@@ -101,6 +101,14 @@ export function CartDrawer() {
                         item.product?.thumbnail ||
                         getProductImages(item.product)[0] ||
                         '/images/placeholder-watch.svg';
+                      const variantTitle =
+                        item.variant?.title &&
+                        item.variant.title !== 'Default Title'
+                          ? item.variant.title
+                          : item.variant_title &&
+                            item.variant_title !== 'Default Title'
+                          ? item.variant_title
+                          : null;
                       return (
                         <li
                           key={item.id}
@@ -129,10 +137,9 @@ export function CartDrawer() {
                                 >
                                   {item.product?.title ?? item.title}
                                 </Link>
-                                {item.variant?.title &&
-                                  item.variant.title !== 'Default Title' && (
+                                {variantTitle && (
                                     <p className="mt-0.5 text-xs text-gray-400">
-                                      {item.variant.title}
+                                      {variantTitle}
                                     </p>
                                   )}
                               </div>

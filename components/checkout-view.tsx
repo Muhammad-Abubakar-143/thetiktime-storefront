@@ -338,6 +338,14 @@ export function CheckoutView() {
                     item.product?.thumbnail ||
                     getProductImages(item.product)[0] ||
                     '/images/placeholder-watch.svg';
+                  const variantTitle =
+                    item.variant?.title &&
+                    item.variant.title !== 'Default Title'
+                      ? item.variant.title
+                      : item.variant_title &&
+                        item.variant_title !== 'Default Title'
+                      ? item.variant_title
+                      : null;
                   return (
                     <li key={item.id} className="flex gap-3">
                       <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded border border-[hsl(var(--gold)/0.1)] bg-[hsl(0_0%_8%)]">
@@ -353,6 +361,11 @@ export function CheckoutView() {
                         <p className="font-serif-display text-sm leading-tight text-champagne">
                           {item.product?.title ?? item.title}
                         </p>
+                        {variantTitle && (
+                          <p className="text-xs text-gray-400">
+                            {variantTitle}
+                          </p>
+                        )}
                         <p className="text-xs text-gray-400">Qty: {item.quantity}</p>
                         <p className="mt-auto font-mono-label text-xs text-gold">
                           {formatPrice(item.total, currency)}

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import type { Product } from '@/lib/medusa';
 import {
   extractBrand,
@@ -27,6 +28,7 @@ export function ProductCard({ product, index = 0, priority }: ProductCardProps) 
   const ref = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
   const { addItem, region } = useCart();
+  const router = useRouter();
 
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -64,6 +66,10 @@ export function ProductCard({ product, index = 0, priority }: ProductCardProps) 
   const handleQuickAdd = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (product.options?.length) {
+      router.push(`/products/${product.handle}`);
+      return;
+    }
     const variant = getMinVariant(product);
     if (!variant) {
       toast.error('This timepiece is not available for purchase.');
@@ -159,7 +165,7 @@ export function ProductCard({ product, index = 0, priority }: ProductCardProps) 
               onClick={handleQuickAdd}
               className="mt-3 w-full overflow-hidden rounded-full border border-[hsl(var(--gold)/0.2)] py-2 font-mono-label text-[10px] uppercase tracking-[0.25em] text-gray-400 transition-all duration-300 hover:border-gold hover:text-gold"
             >
-              Quick Add
+              {product.options?.length ? 'Choose Options' : 'Quick Add'}
             </button>
           </div>
         </motion.div>

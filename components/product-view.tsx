@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -17,7 +17,7 @@ import { toast } from 'sonner';
 import { useCart } from '@/hooks/use-cart';
 import { Reveal, SplitText } from '@/components/reveal';
 import { ProductCard } from '@/components/product-card';
-import type { Product } from '@/lib/medusa';
+import type { Product, ProductOption, ProductVariant } from '@/lib/medusa';
 import {
   extractBrand,
   formatPrice,
@@ -25,6 +25,7 @@ import {
   getMinVariant,
   getProductImages,
   getProductPrice,
+  getVariantPrice,
   slugify,
   truncate,
 } from '@/lib/format';
@@ -34,20 +35,106 @@ interface ProductViewProps {
   related: Product[];
 }
 
+type OptionSelections = Record<string, string>;
+
+function getVariantOption(
+  variant: ProductVariant,
+  option: ProductOption
+) {
+  const matchingOption = variant.options?.find(
+    (variantOption) =>
+      variantOption.option_id === option.id ||
+      variantOption.option?.id === option.id ||
+      variantOption.option?.title === option.title
+  );
+  if (matchingOption) return matchingOption;
+
+  return variant.options?.find((variantOption) =>
+    option.values?.some(
+      (value) =>
+        value.id === variantOption.id && value.value === variantOption.value
+    )
+  );
+}
+
+function getInitialOptionSelections(product: Product): OptionSelections {
+  return Object.fromEntries(
+    (product.options ?? []).map((option) => {
+      const variantOption = product.variants
+        ?.map((variant) => getVariantOption(variant, option))
+        .find(Boolean);
+      const value = option.values?.find(
+        (optionValue) =>
+          optionValue.id === variantOption?.id ||
+          optionValue.value === variantOption?.value
+      ) ?? option.values?.[0];
+      return [option.id, value?.id ?? ''];
+    })
+  );
+}
+
+function variantMatchesSelection(
+  variant: ProductVariant,
+  option: ProductOption,
+  selectedValueId: string
+): boolean {
+  const selectedValue = option.values?.find(
+    (value) => value.id === selectedValueId
+  );
+  if (!selectedValue) return false;
+
+  const variantOption = getVariantOption(variant, option);
+  return !!variantOption &&
+    (variantOption.id === selectedValue.id ||
+      variantOption.value === selectedValue.value);
+}
+
 export function ProductView({ product, related }: ProductViewProps) {
   const { addItem, region, loading } = useCart();
   const currency = region?.currency_code ?? 'pkr';
   const images = getProductImages(product);
   const brand = extractBrand(product);
-  const { formatted, original, price } = getProductPrice(product, currency);
-  const variant = getMinVariant(product);
+  const productOptions = product.options ?? [];
+  const [selectedOptions, setSelectedOptions] = useState<OptionSelections>(() =>
+    getInitialOptionSelections(product)
+  );
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [adding, setAdding] = useState(false);
+  const variant = productOptions.length
+    ? product.variants?.find((candidate) =>
+        productOptions.every(
+          (option) =>
+            !!selectedOptions[option.id] &&
+            variantMatchesSelection(
+              candidate,
+              option,
+              selectedOptions[option.id]
+            )
+        )
+      ) ?? null
+    : getMinVariant(product);
+  const productPrice = getProductPrice(product, currency);
+  const selectedVariantPrice = getVariantPrice(variant, currency);
+  const price = variant ? selectedVariantPrice.price : productPrice.price;
+  const original = variant
+    ? selectedVariantPrice.original
+    : productPrice.original;
+  const formatted = formatPrice(price, currency);
+
+  useEffect(() => {
+    setSelectedOptions(getInitialOptionSelections(product));
+    setSelectedImage(0);
+    setQuantity(1);
+  }, [product]);
 
   const handleAdd = async () => {
     if (!variant) {
-      toast.error('This timepiece is not available for purchase.');
+      toast.error(
+        productOptions.length
+          ? 'Please select an available option combination.'
+          : 'This timepiece is not available for purchase.'
+      );
       return;
     }
     setAdding(true);
@@ -171,6 +258,60 @@ export function ProductView({ product, related }: ProductViewProps) {
               </p>
             </Reveal>
           )}
+          {productOptions.map((option) => (
+            <Reveal key={option.id} delay={0.12}>
+              <fieldset className="mt-6">
+                <legend className="mb-2 font-mono-label text-[10px] uppercase tracking-[0.2em] text-gray-400">
+                  {option.title}
+                </legend>
+                <div className="flex flex-wrap gap-3">
+                  {option.values?.map((value) => {
+                    const available = !!product.variants?.some((candidate) =>
+                      productOptions.every((candidateOption) => {
+                        const selectedValueId =
+                          candidateOption.id === option.id
+                            ? value.id
+                            : selectedOptions[candidateOption.id];
+                        return (
+                          !selectedValueId ||
+                          variantMatchesSelection(
+                            candidate,
+                            candidateOption,
+                            selectedValueId
+                          )
+                        );
+                      })
+                    );
+                    const selected = selectedOptions[option.id] === value.id;
+
+                    return (
+                      <button
+                        key={value.id}
+                        type="button"
+                        aria-pressed={selected}
+                        disabled={!available || adding}
+                        onClick={() =>
+                          setSelectedOptions((current) => ({
+                            ...current,
+                            [option.id]: value.id,
+                          }))
+                        }
+                        className={`rounded-lg border px-3 py-2 transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
+                          selected
+                            ? 'border-gold bg-[hsl(var(--gold)/0.1)] text-gold'
+                            : 'border-[hsl(var(--gold)/0.2)] text-gray-400 hover:border-gold'
+                        }`}
+                      >
+                        <span className="font-mono-label text-[10px] uppercase tracking-[0.2em]">
+                          {value.value}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            </Reveal>
+          ))}
 
           <Reveal delay={0.15}>
             <div className="mt-6 flex items-baseline gap-3">
@@ -241,9 +382,14 @@ export function ProductView({ product, related }: ProductViewProps) {
             </div>
           </Reveal>
 
-          {!variant && (
+          {!variant && productOptions.length === 0 && (
             <p className="mt-3 font-mono-label text-[10px] uppercase tracking-[0.2em] text-burgundy/80">
               Currently unavailable
+            </p>
+          )}
+          {!variant && productOptions.length > 0 && (
+            <p className="mt-3 font-mono-label text-[10px] uppercase tracking-[0.2em] text-gray-400">
+              Select an available {productOptions.length === 1 ? 'option' : 'combination'}
             </p>
           )}
 

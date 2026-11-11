@@ -31,7 +31,12 @@ export interface ProductVariant {
   calculated_price?: CalculatedPrice;
   original_price?: number | null;
   prices?: { amount: number; currency_code: string }[];
-  options?: { id: string; value: string; option?: { id: string; title: string } }[];
+  options?: {
+    id: string;
+    value: string;
+    option_id?: string;
+    option?: { id: string; title: string };
+  }[];
   inventory_quantity?: number;
   allow_backorder?: boolean;
 }
