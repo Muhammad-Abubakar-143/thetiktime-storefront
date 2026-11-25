@@ -2,13 +2,12 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { ProductCard } from '@/components/product-card';
-import { Reveal, SplitText, Stagger, staggerItem } from '@/components/reveal';
-import type { Product } from '@/lib/medusa';
+import { Reveal, SplitText } from '@/components/reveal';
+import type { Product } from '@/lib/storefront-types';
 import type { BrandGroup } from '@/lib/format';
-import { extractBrand, getProductPrice, slugify } from '@/lib/format';
+import { getProductPrice } from '@/lib/format';
 import { useCart } from '@/hooks/use-cart';
 import { cn } from '@/lib/utils';
 
@@ -114,16 +113,16 @@ export function StoreView({ products, brands }: StoreViewProps) {
       <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
         {visible.length > 0 ? (
           <>
-            <Stagger
-              className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4"
-              stagger={0.06}
-            >
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
               {visible.map((product, i) => (
-                <motion.div key={product.id} variants={staggerItem}>
-                  <ProductCard product={product} index={i} priority={i < 4} />
-                </motion.div>
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  index={i}
+                  priority={i < 4}
+                />
               ))}
-            </Stagger>
+            </div>
 
             {hasMore && (
               <div className="mt-14 flex justify-center">

@@ -6,16 +6,16 @@ import { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import type { Product } from '@/lib/medusa';
+import type { Product } from '@/lib/storefront-types';
 import {
   extractBrand,
   formatPrice,
   getImageUrl,
   getProductImages,
   getProductPrice,
+  getMinVariant,
 } from '@/lib/format';
 import { useCart } from '@/hooks/use-cart';
-import { getMinVariant } from '@/lib/format';
 import { toast } from 'sonner';
 
 interface ProductCardProps {
@@ -66,19 +66,39 @@ export function ProductCard({ product, index = 0, priority }: ProductCardProps) 
   const handleQuickAdd = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    
     if (product.options?.length) {
       router.push(`/products/${product.handle}`);
       return;
     }
+
     const variant = getMinVariant(product);
     if (!variant) {
       toast.error('This timepiece is not available for purchase.');
       return;
     }
+
     try {
-      await addItem(variant.id, 1);
+      // Extract Hostinger product ID from metadata
+      const hostingerProductId = product.metadata?.hostinger_product_id as number | undefined;
+      if (!hostingerProductId) {
+        toast.error('Product information is incomplete.');
+        return;
+      }
+
+      const variantId = parseInt(variant.id, 10);
+      
+      await addItem(
+        hostingerProductId,
+        variantId,
+        1,
+        product.title,
+        price,
+        primary
+      );
       toast.success(`${product.title} added to your cart.`);
-    } catch {
+    } catch (err) {
+      console.error('Add to cart error:', err);
       toast.error('Unable to add to cart. Please try again.');
     }
   };

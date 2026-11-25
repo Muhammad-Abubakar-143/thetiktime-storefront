@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { ProductView } from '@/components/product-view';
-import { getProductByHandle, listProducts } from '@/lib/medusa';
+import { getProductByHandle, listProducts } from '@/lib/products';
 import { extractBrand, slugify } from '@/lib/format';
 
 export const revalidate = 60;
@@ -46,8 +46,11 @@ export default async function ProductPage({ params }: PageProps) {
       .filter(
         (p) =>
           p.id !== currentProduct.id &&
-          (slugify(extractBrand(p)) === slugify(brand) ||
-            p.collection_id === currentProduct.collection_id)
+          ((!!brand && slugify(extractBrand(p)) === slugify(brand)) ||
+            (!!currentProduct.categories?.length &&
+              p.categories?.some((category) =>
+                currentProduct.categories?.some((current) => current.id === category.id)
+              )))
       )
       .slice(0, 4);
   } catch (err) {

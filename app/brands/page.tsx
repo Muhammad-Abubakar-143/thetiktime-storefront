@@ -1,17 +1,14 @@
 import { BrandsView } from '@/components/brands-view';
-import { listProducts } from '@/lib/medusa';
-import { groupProductsByBrand } from '@/lib/format';
+import { listCollections } from '@/lib/collections';
 
 export const revalidate = 60;
 
 export default async function BrandsPage() {
-  let products: Awaited<ReturnType<typeof listProducts>>['products'] = [];
+  let brands: Awaited<ReturnType<typeof listCollections>> = [];
   try {
-    const data = await listProducts({ limit: 100 });
-    products = data.products;
+    brands = await listCollections();
   } catch (err) {
     console.error('Brands data fetch failed:', err);
   }
-  const brands = groupProductsByBrand(products);
   return <BrandsView brands={brands} />;
 }

@@ -1,4 +1,4 @@
-import type { Product, ProductVariant } from './medusa';
+import type { Product, ProductVariant } from './storefront-types';
 
 const PKR_LOCALE = 'en-PK';
 
@@ -9,7 +9,6 @@ export function formatPrice(
   if (amount === null || amount === undefined || Number.isNaN(amount)) {
     return '—';
   }
-  // Medusa v2 returns amounts in major units (1000 = Rs 1,000)
   const value = amount;
   try {
     return new Intl.NumberFormat(PKR_LOCALE, {
@@ -23,23 +22,10 @@ export function formatPrice(
 }
 
 export function getVariantPrice(
-  variant?: ProductVariant | null,
-  currencyCode = 'pkr'
+  variant?: ProductVariant | null
 ): { price: number; original?: number | null } {
   if (!variant) return { price: 0 };
-  const calculated = variant.calculated_price;
-  if (calculated) {
-    return {
-      price: calculated.calculated_amount,
-      original: calculated.original_amount ?? null,
-    };
-  }
-  const price =
-    variant.original_price ??
-    variant.prices?.find((p) => p.currency_code === currencyCode)?.amount ??
-    variant.prices?.[0]?.amount ??
-    0;
-  return { price, original: null };
+  return { price: variant.price, original: variant.compare_price ?? null };
 }
 
 export function getProductPrice(
@@ -49,7 +35,7 @@ export function getProductPrice(
   if (!product || !product.variants?.length) {
     return { price: 0, formatted: formatPrice(0, currencyCode) };
   }
-  const prices = product.variants.map((v) => getVariantPrice(v, currencyCode));
+  const prices = product.variants.map((v) => getVariantPrice(v));
   const min = prices.reduce(
     (acc, p) => (p.price < acc.price ? p : acc),
     prices[0]

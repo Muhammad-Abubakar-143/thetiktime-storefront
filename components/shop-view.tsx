@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SlidersHorizontal, X, Check, ChevronDown } from 'lucide-react';
 import { ProductCard } from '@/components/product-card';
 import { Reveal } from '@/components/reveal';
-import type { Product } from '@/lib/medusa';
+import type { Product } from '@/lib/storefront-types';
 import type { BrandGroup } from '@/lib/format';
 import {
   extractBrand,
@@ -57,7 +57,10 @@ export function ShopView({ products, brands, collections }: ShopViewProps) {
     let list = [...products];
 
     if (selectedBrand) {
-      list = list.filter((p) => slugify(extractBrand(p)) === selectedBrand);
+      list = list.filter((p) => {
+        const categoryMatch = p.categories?.some((cat) => slugify(cat.name) === selectedBrand);
+        return categoryMatch || slugify(extractBrand(p) || 'TheTikTime') === selectedBrand;
+      });
     }
     if (selectedCollection) {
       list = list.filter((p) => p.collection_id === selectedCollection);

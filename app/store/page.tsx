@@ -1,5 +1,5 @@
 import { StoreView } from '@/components/store-view';
-import { listProducts } from '@/lib/medusa';
+import { listProducts } from '@/lib/products';
 import { groupProductsByBrand } from '@/lib/format';
 
 export const revalidate = 60;

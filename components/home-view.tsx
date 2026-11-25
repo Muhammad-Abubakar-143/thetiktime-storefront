@@ -8,7 +8,7 @@ import { ArrowRight, ShieldCheck, Truck, CreditCard, Sparkles } from 'lucide-rea
 import { Reveal, SplitText, Stagger, staggerItem } from '@/components/reveal';
 import { ProductCard } from '@/components/product-card';
 import { BrandCard } from '@/components/brand-card';
-import type { Product } from '@/lib/medusa';
+import type { Product } from '@/lib/storefront-types';
 import type { BrandGroup as BrandGroupType } from '@/lib/format';
 
 const HeroScene = dynamic(

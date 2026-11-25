@@ -5,7 +5,6 @@ import { Providers } from '@/components/providers';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { CartDrawer } from '@/components/cart/cart-drawer';
-import { RegionBootstrap } from '@/components/region-bootstrap';
 import { PageTransition } from '@/components/page-transition';
 import { SmoothScroll } from '@/components/smooth-scroll';
 
@@ -80,7 +79,6 @@ export default function RootLayout({
       </head>
       <body className="font-sans-body bg-background text-foreground antialiased">
         <Providers>
-          <RegionBootstrap />
           <SmoothScroll />
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />

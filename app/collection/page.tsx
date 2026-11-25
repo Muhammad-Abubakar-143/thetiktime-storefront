@@ -1,26 +1,24 @@
 import { Suspense } from 'react';
 import { ShopView } from '@/components/shop-view';
-import { listProducts, listCollections } from '@/lib/medusa';
-import { groupProductsByBrand } from '@/lib/format';
+import { listProductsWithCollections } from '@/lib/products';
+import { listCollections } from '@/lib/collections';
 
 export const revalidate = 60;
 
 export default async function ShopPage() {
-  let products: Awaited<ReturnType<typeof listProducts>>['products'] = [];
-  let collections: Awaited<ReturnType<typeof listCollections>> = [];
+  let products: Awaited<ReturnType<typeof listProductsWithCollections>>['products'] = [];
+  let brands: Awaited<ReturnType<typeof listCollections>> = [];
 
   try {
-    const [productsData, collectionsData] = await Promise.all([
-      listProducts({ limit: 100 }),
+    const [productsData, brandsData] = await Promise.all([
+      listProductsWithCollections({ limit: 100 }),
       listCollections(),
     ]);
     products = productsData.products;
-    collections = collectionsData;
+    brands = brandsData;
   } catch (err) {
     console.error('Shop data fetch failed:', err);
   }
-
-  const brands = groupProductsByBrand(products);
 
   return (
     <Suspense
@@ -38,11 +36,7 @@ export default async function ShopPage() {
       <ShopView
         products={products}
         brands={brands}
-        collections={collections.map((c) => ({
-          id: c.id,
-          title: c.title,
-          handle: c.handle,
-        }))}
+        collections={[]}
       />
     </Suspense>
   );

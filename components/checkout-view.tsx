@@ -14,8 +14,8 @@ import {
   Truck,
 } from 'lucide-react';
 import { useCart } from '@/hooks/use-cart';
-import { formatPrice, getImageUrl, getProductImages } from '@/lib/format';
-import type { Order } from '@/lib/medusa';
+import { formatPrice, getImageUrl } from '@/lib/format';
+import type { PlacedOrder } from '@/lib/orders';
 import { toast } from 'sonner';
 
 type Step = 'details' | 'review' | 'processing' | 'confirmation';
@@ -25,7 +25,7 @@ export function CheckoutView() {
   const currency = cart?.currency_code ?? region?.currency_code ?? 'pkr';
   const [step, setStep] = useState<Step>('details');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<PlacedOrder | null>(null);
   const [form, setForm] = useState({
     email: '',
     firstName: '',
@@ -36,6 +36,7 @@ export function CheckoutView() {
     city: '',
     province: '',
     postalCode: '',
+    notes: '',
   });
 
   const subtotal = cart?.subtotal ?? 0;
@@ -49,17 +50,15 @@ export function CheckoutView() {
     try {
       const result = await checkout({
         email: form.email,
-        shippingAddress: {
-          first_name: form.firstName,
-          last_name: form.lastName,
-          phone: form.phone,
-          address_1: form.address1,
-          address_2: form.address2 || undefined,
-          city: form.city,
-          province: form.province || undefined,
-          postal_code: form.postalCode || undefined,
-          country_code: 'pk',
-        },
+        firstName: form.firstName,
+        lastName: form.lastName,
+        phone: form.phone,
+        address1: form.address1,
+        address2: form.address2 || undefined,
+        city: form.city,
+        province: form.province || undefined,
+        postalCode: form.postalCode || undefined,
+        notes: form.notes || undefined,
       });
       setOrder(result);
       setStep('confirmation');
@@ -224,6 +223,12 @@ export function CheckoutView() {
                       value={form.postalCode}
                       onChange={(v) => setForm((f) => ({ ...f, postalCode: v }))}
                     />
+                    <CheckoutField
+                      label="Delivery Instructions (Optional)"
+                      value={form.notes}
+                      onChange={(v) => setForm((f) => ({ ...f, notes: v }))}
+                      className="sm:col-span-2"
+                    />
                   </div>
 
                   <button
@@ -333,21 +338,10 @@ export function CheckoutView() {
               </h3>
               <ul className="mt-5 space-y-4">
                 {cart?.items?.map((item) => {
-                  const img =
-                    item.thumbnail ||
-                    item.product?.thumbnail ||
-                    getProductImages(item.product)[0] ||
-                    '/images/placeholder-watch.svg';
-                  const variantTitle =
-                    item.variant?.title &&
-                    item.variant.title !== 'Default Title'
-                      ? item.variant.title
-                      : item.variant_title &&
-                        item.variant_title !== 'Default Title'
-                      ? item.variant_title
-                      : null;
+                  const img = item.thumbnail || '/images/placeholder-watch.svg';
+                  const variantTitle = item.title;
                   return (
-                    <li key={item.id} className="flex gap-3">
+                    <li key={`${item.product_id}-${item.variant_id}`} className="flex gap-3">
                       <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded border border-[hsl(var(--gold)/0.1)] bg-[hsl(0_0%_8%)]">
                         <Image
                           src={getImageUrl(img)}
@@ -472,10 +466,9 @@ function OrderConfirmation({
   order,
   currency,
 }: {
-  order: Order;
+  order: PlacedOrder;
   currency: string;
 }) {
-  const orderNumber = order.display_id ?? order.id.slice(-8).toUpperCase();
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-[hsl(0_0%_4%)] px-6 pt-28 text-center">
       <motion.div
@@ -517,7 +510,7 @@ function OrderConfirmation({
           Order Number
         </p>
         <p className="mt-2 font-serif-display text-2xl text-gold">
-          #{orderNumber}
+          #{order.orderNumber}
         </p>
         <div className="my-4 hairline" />
         <div className="flex justify-between gap-8">

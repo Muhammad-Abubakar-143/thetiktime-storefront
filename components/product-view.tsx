@@ -17,7 +17,7 @@ import { toast } from 'sonner';
 import { useCart } from '@/hooks/use-cart';
 import { Reveal, SplitText } from '@/components/reveal';
 import { ProductCard } from '@/components/product-card';
-import type { Product, ProductOption, ProductVariant } from '@/lib/medusa';
+import type { Product, ProductOption, ProductVariant } from '@/lib/storefront-types';
 import {
   extractBrand,
   formatPrice,
@@ -116,7 +116,7 @@ export function ProductView({ product, related }: ProductViewProps) {
       ) ?? null
     : getMinVariant(product);
   const productPrice = getProductPrice(product, currency);
-  const selectedVariantPrice = getVariantPrice(variant, currency);
+  const selectedVariantPrice = getVariantPrice(variant);
   const price = variant ? selectedVariantPrice.price : productPrice.price;
   const original = variant
     ? selectedVariantPrice.original
@@ -147,9 +147,19 @@ export function ProductView({ product, related }: ProductViewProps) {
     }
     setAdding(true);
     try {
-      await addItem(variant.id, quantity);
+      const hostingerProductId = product.metadata?.hostinger_product_id as number | undefined;
+      const variantId = parseInt(variant.id, 10);
+      
+      if (!hostingerProductId) {
+        toast.error('Product information is incomplete.');
+        return;
+      }
+
+      const thumbnail = variant.thumbnail || (product.images?.[0]?.url ?? '');
+      await addItem(hostingerProductId, variantId, quantity, product.title, price, thumbnail);
       toast.success(`${product.title} added to your cart.`);
-    } catch {
+    } catch (err) {
+      console.error('Add to cart error:', err);
       toast.error('Unable to add to cart. Please try again.');
     } finally {
       setAdding(false);

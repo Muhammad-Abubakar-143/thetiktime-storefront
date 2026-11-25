@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import { useCart } from '@/hooks/use-cart';
-import { formatPrice, getProductImages } from '@/lib/format';
+import { formatPrice } from '@/lib/format';
 import { useEffect } from 'react';
 
 export function CartDrawer() {
@@ -99,19 +99,15 @@ export function CartDrawer() {
                       const img =
                         item.thumbnail ||
                         item.product?.thumbnail ||
-                        getProductImages(item.product)[0] ||
                         '/images/placeholder-watch.svg';
                       const variantTitle =
                         item.variant?.title &&
                         item.variant.title !== 'Default Title'
                           ? item.variant.title
-                          : item.variant_title &&
-                            item.variant_title !== 'Default Title'
-                          ? item.variant_title
-                          : null;
+                          : item.title;
                       return (
                         <li
-                          key={item.id}
+                          key={`${item.product_id}-${item.variant_id}`}
                           className="flex gap-4"
                         >
                           <Link
@@ -144,7 +140,7 @@ export function CartDrawer() {
                                   )}
                               </div>
                               <button
-                                onClick={() => removeItem(item.id)}
+                                onClick={() => removeItem(Number(item.product_id), Number(item.variant_id))}
                                 aria-label="Remove item"
                                 className="text-gray-400 transition-colors hover:text-destructive"
                               >
@@ -155,7 +151,7 @@ export function CartDrawer() {
                               <div className="flex items-center border border-[hsl(var(--gold)/0.18)]">
                                 <button
                                   onClick={() =>
-                                    setItemQuantity(item.id, item.quantity - 1)
+                                    setItemQuantity(Number(item.product_id), Number(item.variant_id), item.quantity - 1)
                                   }
                                   disabled={loading}
                                   aria-label="Decrease quantity"
@@ -168,7 +164,7 @@ export function CartDrawer() {
                                 </span>
                                 <button
                                   onClick={() =>
-                                    setItemQuantity(item.id, item.quantity + 1)
+                                    setItemQuantity(Number(item.product_id), Number(item.variant_id), item.quantity + 1)
                                   }
                                   disabled={loading}
                                   aria-label="Increase quantity"

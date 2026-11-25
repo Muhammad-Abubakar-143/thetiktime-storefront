@@ -1,5 +1,5 @@
 import { HomeView } from '@/components/home-view';
-import { listProducts } from '@/lib/medusa';
+import { listProducts } from '@/lib/products';
 import { groupProductsByBrand } from '@/lib/format';
 
 export const revalidate = 60;
@@ -14,11 +14,7 @@ export default async function HomePage() {
     console.error('Home data fetch failed:', err);
   }
 
-  const featured = products
-    .filter((p) =>
-      p.tags?.some((t) => t.value.trim().toLowerCase() === 'featured')
-    )
-    .slice(0, 8);
+  const featured = products.slice(0, 8);
   const brands = groupProductsByBrand(products);
 
   return <HomeView featured={featured} brands={brands} />;
