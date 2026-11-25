@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Providers } from '@/components/providers';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
@@ -8,23 +8,23 @@ import { CartDrawer } from '@/components/cart/cart-drawer';
 import { PageTransition } from '@/components/page-transition';
 import { SmoothScroll } from '@/components/smooth-scroll';
 
-const display = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+const display = localFont({
+  src: '../node_modules/@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-normal.woff2',
+  weight: '300 700',
   variable: '--font-display',
   display: 'swap',
 });
 
-const body = Inter({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+const body = localFont({
+  src: '../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2',
+  weight: '300 600',
   variable: '--font-body',
   display: 'swap',
 });
 
-const mono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
+const mono = localFont({
+  src: '../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2',
+  weight: '400 500',
   variable: '--font-mono',
   display: 'swap',
 });
